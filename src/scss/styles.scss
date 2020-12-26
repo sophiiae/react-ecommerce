@@ -1,3 +1,5 @@
+@import './form.scss';
+
 .homepage {
 	display: flex;
 	flex-direction: column;
@@ -156,4 +158,13 @@
 	  }
 	}
 }
-  
+
+.sign-in {
+	width: 30vw;
+	display: flex;
+	flex-direction: column;
+
+	.title {
+		margin: 10px 0;
+	}
+}
