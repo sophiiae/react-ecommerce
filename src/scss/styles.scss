@@ -106,6 +106,7 @@
 	
 		.option {
 			padding: 10px 15px;
+			cursor: pointer;
 		}
 	}
 }
@@ -160,11 +161,20 @@
 }
 
 .sign-in {
-	width: 30vw;
+	width: 380px;
 	display: flex;
 	flex-direction: column;
 
 	.title {
 		margin: 10px 0;
 	}
+
+	.buttons {
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+* {
+	box-sizing: border-box;
 }

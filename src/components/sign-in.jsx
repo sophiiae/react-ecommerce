@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { FormInput, CustomButton } from './index';
 
+// firebase
+import { signInWithGoogle } from '../../src/firebase/firebase.utils';
+
 export const SignIn = () => {
 	const [state, setstate] = useState({
 		email: '',
@@ -38,8 +41,13 @@ export const SignIn = () => {
 					value={state.password}
 					handleChange={handleChange}
 					required/>
-
-				<CustomButton type="submit"> Sign in </CustomButton>
+				
+				<div className="buttons">
+					<CustomButton type="submit"> Sign in </CustomButton>
+					<CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+						Sign in with Google
+					</CustomButton>
+				</div>
 			</form>
 		</div>
 	)
