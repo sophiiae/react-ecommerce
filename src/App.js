@@ -6,15 +6,15 @@ import { Header } from './components/index';
 import './App.css';
 import './scss/styles.scss';
 
-import { auth } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 function App() {
 	const [state, setstate] = useState({ currentUser: null });
 
 	useEffect(() => {
-		auth.onAuthStateChanged(user => {
+		auth.onAuthStateChanged(async user => {
+			createUserProfileDocument(user);
 			setstate({ currentUser: user });
-			console.log(user);
 		})
 	}, []);
 
