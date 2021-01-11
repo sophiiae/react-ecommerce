@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormInput, CustomButton } from './index';
 
 // firebase
@@ -17,7 +17,7 @@ export const SignIn = () => {
 
 	const handleChange = event => {
 		const { value, name } = event.target;
-		setstate({ [name]: value });
+		setstate({ ...state, [name]: value });
 	}
 
 	return (
