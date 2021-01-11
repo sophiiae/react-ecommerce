@@ -18,7 +18,6 @@ function App() {
 				const userRef = await createUserProfileDocument(userAuth);
 
 				userRef.on('value', (snapshot) => {
-					console.log(snapshot);
 					setstate({
 						currentUser: {
 							id: snapshot.key, 
@@ -31,10 +30,6 @@ function App() {
 			setstate({ currentUser: userAuth });
 		})
 	}, []);
-
-	// useEffect(() => {
-	// 	console.log(state);
-	// }, [state]);
 
 	return (
 		<div>
