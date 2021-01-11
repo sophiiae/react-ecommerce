@@ -12,9 +12,23 @@ function App() {
 	const [state, setstate] = useState({ currentUser: null });
 
 	useEffect(() => {
-		auth.onAuthStateChanged(async user => {
-			createUserProfileDocument(user);
-			setstate({ currentUser: user });
+		auth.onAuthStateChanged(async userAuth => {
+			// store user information if user has signedn in
+			if (userAuth) {
+				const userRef = await createUserProfileDocument(userAuth);
+
+				userRef.on('value', (snapshot) => {
+					console.log(snapshot);
+					setstate({
+						currentUser: {
+							id: snapshot.key, 
+							...snapshot.val()
+						}
+					});
+				})
+			}
+
+			setstate({ currentUser: userAuth });
 		})
 	}, []);
 
