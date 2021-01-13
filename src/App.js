@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Homepage, ShopPage, SignInAndSignUp } from './pages/index';
+import { HomePage, ShopPage, SignInAndSignUpPage } from './pages/index';
 import { Header } from './components/index';
 import './App.css';
 import './scss/styles.scss';
@@ -10,7 +10,9 @@ import './scss/styles.scss';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 
-function App(props) { 
+function App(props) {
+	const { setCurrentUser } = props;
+
 	useEffect(() => {
 		auth.onAuthStateChanged(async userAuth => {
 			// store user information if user has signedn in
@@ -18,31 +20,45 @@ function App(props) {
 				const userRef = await createUserProfileDocument(userAuth);
 
 				userRef.on('value', (snapshot) => {
-					props.setCurrentUser({
+					setCurrentUser({
 						id: snapshot.key, 
 						...snapshot.val()
 					});
 				})
 			}
 
-			props.setCurrentUser(userAuth); // pass update value
+			setCurrentUser(userAuth); // pass update value
 		})
-	}, [props]);
+	}, [setCurrentUser]);
 
 	return (
 		<div>
 			<Header />
 			<Switch>
-				<Route exact path='/' component={Homepage} />
+				<Route exact path='/' component={HomePage} />
 				<Route path='/shop' component={ShopPage} />
-				<Route path='/signin' component={SignInAndSignUp} />
+				<Route
+					exact
+					path='/signin'
+					render={() => 
+						props.currentUser
+						? (<Redirect to='/' />)
+						: (<SignInAndSignUpPage />)}
+				/>
 			</Switch>
 		</div>
 	)
 }
 
+const mapStateToProps = ({ user }) => ({
+	currentUser: user.currentUser
+})
+
 const mapDispatchToProps = dispatch => ({
 	setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(App);
