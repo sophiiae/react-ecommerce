@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import SHOP_DATA from '../assets/shop.data';
+import SHOP_DATA from '../assets/data/shop.data';
 import { CollectionPreview } from '../components/collection_preview';
 
 export const ShopPage = () => {
