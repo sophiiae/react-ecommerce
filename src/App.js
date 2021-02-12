@@ -19,10 +19,10 @@ function App(props) {
 			if (userAuth) {
 				const userRef = await createUserProfileDocument(userAuth);
 
-				userRef.on('value', (snapshot) => {
+				userRef.onSnapshot('value', (snapshot) => {
 					setCurrentUser({
-						id: snapshot.key, 
-						...snapshot.val()
+						id: snapshot.id, 
+						...snapshot.data()
 					});
 				})
 			}

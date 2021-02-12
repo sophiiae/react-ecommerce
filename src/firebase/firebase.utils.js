@@ -1,7 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import 'firebase/database';
 
 // copy config from web-app CDN
 const config = {
@@ -21,18 +20,16 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if (!userAuth) return;
 
 	// get snapshot with user id
-	const database = firebase.database();
-	const userRef = database.ref(`users/${userAuth.uid}`);
-
-	const snapshot = await userRef.get();
+	const userRef = firestore.doc(`users/${userAuth.uid}`);
+	const snapShot = await userRef.get();
 
 	// if user doesn't exist, create new user in the database
-	if (!snapshot.exists()) {
+	if (!snapShot.exists) {
 		const { displayName, email } = userAuth;
 		const createdAt = new Date();
 
 		try {
-			database.ref(`users/${userAuth.uid}`).set({
+			await userRef.set({
 				displayName,
 				email,
 				createdAt,
@@ -45,7 +42,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 	return userRef;
 }
-
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
