@@ -7,8 +7,8 @@
 		{
 			"type": "chrome",
 			"request": "launch",
-			"name": "sign in",
-			"url": "http://localhost:3000/signin",
+			"name": "home",
+			"url": "http://localhost:3000/",
 			"webRoot": "${workspaceFolder}"
 		}
 	]

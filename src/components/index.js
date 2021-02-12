@@ -8,4 +8,4 @@ export * from './sign-up';
 
 export * from './form-input';
 export * from './custom-button';
-export * from './cart-icon';
+export * from './cart-dropdown';
