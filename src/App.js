@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { HomePage, ShopPage, SignInAndSignUpPage } from './pages/index';
 import { Header } from './components/index';
+import CheckoutPage from './pages/checkout';
 import './App.css';
 import './scss/styles.scss';
 
@@ -39,6 +40,7 @@ function App(props) {
 			<Switch>
 				<Route exact path='/' component={HomePage} />
 				<Route path='/shop' component={ShopPage} />
+				<Route exact path='/checkout' component={CheckoutPage} />
 				<Route
 					exact
 					path='/signin'
