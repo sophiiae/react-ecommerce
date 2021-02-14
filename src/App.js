@@ -3,9 +3,10 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { HomePage, ShopPage, SignInAndSignUpPage } from './pages/index';
+import { HomePage, SignInAndSignUpPage } from './pages/index';
 import { Header } from './components/index';
 import CheckoutPage from './pages/checkout';
+import ShopPage from './pages/shop';
 import './App.css';
 import './scss/styles.scss';
 
